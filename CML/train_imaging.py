@@ -9,7 +9,7 @@
 =================================================='''
 
 import torch
-from models import uunet, qqnet, ggnet, qqnet_patch
+from models import uunet
 from data import planeDataset
 import os, sys
 import numpy as np
@@ -19,7 +19,7 @@ import cv2
 from utils import Logger, compute_ssim, compute_psnr
 
 
-net = 'qqnet' #['uunet', 'qqnet', 'ggnet', 'qqnet_patch']
+net = 'uunet' #['uunet', 'qqnet', 'ggnet', 'qqnet_patch']
 in_dim = 128
 batch_size = 16
 batch_size_test = 1
@@ -40,7 +40,7 @@ l1_weight = 0.0001
 log_path = './log'
 
 
-m = qqnet(in_dim=in_dim).cuda()
+m = uunet(in_dim=in_dim).cuda()
 if net == 'uunet':
     m = uunet(in_dim=in_dim).cuda()
 if net == 'ggnet':
@@ -50,10 +50,11 @@ if net == 'qqnet_patch':
 optim = torch.optim.Adam(m.parameters(), lr=0.001)
 loss_f = torch.nn.MSELoss()
 
-train_img_path = r'E:\datasets\plane\plane_crop_train'
-train_inten_path = r'E:\projects\SPC_QNN\plane_randomP_intensities\train_dim_{}.npy'.format(in_dim)
-test_img_path = r'E:\datasets\plane\plane_crop_test'
-test_inten_path = r'E:\projects\SPC_QNN\plane_randomP_intensities\test_dim_{}.npy'.format(in_dim)
+train_img_path = '/content/rareplane/plane_crop_train'
+train_inten_path = '/content/plane_randomP_intensities/train_dim_{}.npy'.format(in_dim)
+test_img_path = '/content/rareplane/plane_crop_test'
+test_inten_path = '/content/plane_randomP_intensities/test_dim_{}.npy'.format(in_dim)
+
 
 test_realimg_path = r'E:\datasets\plane\handmade'
 test_realinten_path = r'E:\projects\SPC_QNN\plane_randomP_intensities\handmade_dim_{}.npy'.format(in_dim)
@@ -137,9 +138,9 @@ def test_real(cpk=50):
 
 
 if __name__ == '__main__':
-    log_name = 'plane_{}_indim{}.log'.format(net, in_dim)
+    # log_name = 'plane_{}_indim{}.log'.format(net, in_dim)
     # log_name = 'mnist_10_learnP_{}_in{}_emb{}.log'.format(net, in_dim, embed_dim)
-    sys.stdout = Logger(filename=os.path.join(log_path, log_name))
+    # sys.stdout = Logger(filename=os.path.join(log_path, log_name))
     train(501)
     for i in range(0,1001,100):
        test(cpk=i)
