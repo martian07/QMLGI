@@ -16,11 +16,11 @@ dim = 32
 net = 'QNN_like_2'
 
 ####################################################
-path = './learnP_intensities/test_dim_{}.npy'.format(dim)
+path = '/content/learnP_intensities/test_dim_{}.npy'.format(dim)
 #path = './checkpoints_clc_randomP_indim_{}_{}/500_test_features.npy'.format(dim, net)
 #####################################################
 
-label_path = r'E:\datasets\mnist\test-labels-idx1-ubyte'
+label_path = '/content/t10k-labels-idx1-ubyte/t10k-labels-idx1-ubyte'
 with open(label_path, 'rb') as lbpath:
     magic, n = struct.unpack('>II', lbpath.read(8))
     labels = np.fromfile(lbpath, dtype=np.uint8)
@@ -33,7 +33,7 @@ feas = np.load(path)
 print(feas.shape)
 
 ########################################################
-save_name = './visualization/learnP_origin_indim_{}.npy'.format(dim)
+save_name = './learnP_origin_indim_{}.npy'.format(dim)
 # save_name = './visualization/randomP_{}_indim_{}.npy'.format(net, dim)
 #######################################################
 
@@ -52,7 +52,7 @@ plt.xlabel('Main component 1')
 plt.ylabel('Main component 2')
 
 #################################################################
-plt.savefig('./visualization/learnP_origin_indim_{}.svg'.format(dim))
+plt.savefig('./learnP_origin_indim_{}.svg'.format(dim))
 #plt.savefig('./visualization/randomP_{}_indim_{}.svg'.format(net, dim))
 #################################################################
 
