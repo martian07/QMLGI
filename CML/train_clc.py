@@ -49,13 +49,12 @@ loss_f = torch.nn.NLLLoss()
 
 
 
-train_bkt_path = './randomP_intensities/train_dim_{}.npy'.format(in_dim)
+train_bkt_path = '/content/randomP_intensities/train_dim_{}.npy'.format(in_dim)
 #train_bkt_path = './learnP_intensities/train_dim_{}.npy'.format(in_dim)
-train_lab_path = r'E:\datasets\mnist\train-labels-idx1-ubyte'
-test_bkt_path = './randomP_intensities/test_dim_{}.npy'.format(in_dim)
+train_lab_path = '/content/train-labels-idx1-ubyte/train-labels-idx1-ubyte'
+test_bkt_path = '/content/randomP_intensities/test_dim_{}.npy'.format(in_dim)
 #test_bkt_path = './learnP_intensities/test_dim_{}.npy'.format(in_dim)
-test_lab_path = r'E:\datasets\mnist\test-labels-idx1-ubyte'
-
+test_lab_path = '/content/t10k-labels-idx1-ubyte/t10k-labels-idx1-ubyte'
 
 
 def train(epoch=500):
@@ -125,6 +124,6 @@ if __name__ == '__main__':
     # log_name = 'mnist_10_randomP_{}_in{}_emb{}_trainflag_{}.log'.format(net, in_dim, embed_dim, train_flag)
     # #log_name = 'mnist_10_learnP_{}_in{}_emb{}.log'.format(net, in_dim, embed_dim)
     # sys.stdout = Logger(filename=os.path.join(log_path, log_name))
-    # train(501)
+    train(501)
     for i in range(0,501,100):
        test(cpk=i)
