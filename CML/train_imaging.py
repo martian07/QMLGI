@@ -141,6 +141,7 @@ if __name__ == '__main__':
     # log_name = 'plane_{}_indim{}.log'.format(net, in_dim)
     # log_name = 'mnist_10_learnP_{}_in{}_emb{}.log'.format(net, in_dim, embed_dim)
     # sys.stdout = Logger(filename=os.path.join(log_path, log_name))
-    train(501)
-    for i in range(0,1001,100):
-       test(cpk=i)
+    train(1001)
+    # for i in range(0,1001,100):
+    #    test(cpk=i)
+    test(cpk=1000)
