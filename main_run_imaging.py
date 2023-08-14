@@ -1,7 +1,7 @@
 
 import os
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+# os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 import numpy as np
 import tensorcircuit as tc
@@ -13,19 +13,19 @@ import pickle
 from tensorflow import keras
 import argparse
 from functools import partial
-from model import quantum_circuit, quantum_circuit_Noise, quantum_circuit_TB, quantum_circuit_fixing, quantum_circuit_fixing_wout
-from model import quantum_Heisenberg
-from model import quantum_IQP
+from QML_model import quantum_circuit, quantum_circuit_Noise, quantum_circuit_fixing, quantum_circuit_fixing_wout
+from QML_model import quantum_Heisenberg
+
 
 from PIL import Image
 
-# os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 # os.environ["TF_FORCE_GPU_ALLOW_GROWTH"] = "true"
 
 parser = argparse.ArgumentParser(description='Quantum-Classical NN for SPI')
-parser.add_argument('--cofficents-path', metavar='G', default="./cofficients.txt",
-                    help='path of label')                                             
+# parser.add_argument('--cofficents-path', metavar='G', default="./cofficients.txt",
+#                     help='path of label')                                             
 # parser.add_argument('--notfixing', type=bool, default=True,
 #                     help='not fixing the tuning parameters')
 parser.add_argument('--use-schedule', type=bool, default=False,
@@ -56,28 +56,28 @@ args = parser.parse_args()
 np.random.seed(args.seed)
 K = tc.set_backend("tensorflow")
 
-cofficients = []
-f = open(args.cofficents_path) 
-for line in f:
-    cofficients.append(float(line.strip()))
-    print(cofficients)
+# cofficients = []
+# f = open(args.cofficents_path) 
+# for line in f:
+#     cofficients.append(float(line.strip()))
+#     print(cofficients)
 
-args.train_img_path = "./plane_randomP_intensities/train_dim_{}.npy".format(args.dim)
-args.test_img_path = "./plane_randomP_intensities/test_dim_{}.npy".format(args.dim)
-args.train_label_path = "./plane_crop_train"
-args.test_label_path = "./plane_crop_test"
+args.train_img_path = "content/plane_randomP_intensities/train_dim_{}.npy".format(args.dim)
+args.test_img_path = "content/plane_randomP_intensities/test_dim_{}.npy".format(args.dim)
+args.train_label_path = "/content/rareplane/plane_crop_train"
+args.test_label_path = "/content/rareplane/plane_crop_test"
 
 if args.dim == 64:
-    cofficient = cofficients[0]
+    cofficient = 633.4
     min_value = 70.74
 elif args.dim == 128:
-    cofficient = cofficients[1]
+    cofficient = 643.4
     min_value = 60.93
 elif args.dim == 256:
-    cofficient = cofficients[2]
+    cofficient = 696.1
     min_value = 60.94
 elif args.dim == 512:
-    cofficient = cofficients[3]
+    cofficient = 696.1
     min_value = 61.02
 else:
     raise ValueError("Unknown dimension of data input.")
