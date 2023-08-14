@@ -62,8 +62,8 @@ K = tc.set_backend("tensorflow")
 #     cofficients.append(float(line.strip()))
 #     print(cofficients)
 
-args.train_img_path = "content/plane_randomP_intensities/train_dim_{}.npy".format(args.dim)
-args.test_img_path = "content/plane_randomP_intensities/test_dim_{}.npy".format(args.dim)
+args.train_img_path = "/content/plane_randomP_intensities/train_dim_{}.npy".format(args.dim)
+args.test_img_path = "/content/plane_randomP_intensities/test_dim_{}.npy".format(args.dim)
 args.train_label_path = "/content/rareplane/plane_crop_train"
 args.test_label_path = "/content/rareplane/plane_crop_test"
 
